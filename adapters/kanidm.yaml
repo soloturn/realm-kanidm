@@ -9,9 +9,12 @@
 commands:
   build: "cargo build"
   test: "cargo test"          # must work without extra setup
-  lint: "cargo clippy"
-  fmt: "cargo fmt --check"
-  run: "cd server/daemon && ./run_insecure_dev_server.sh"
+  # CI's "Linting checks" workflow is two jobs — clippy AND rustfmt — so lint
+  # has to run both or it reports a green that CI contradicts. A wrapper
+  # because the adapter execs a bare argv with no shell.
+  lint: "../../realms/realm-kanidm/scripts/lint.sh"
+  fmt: "cargo fmt"            # writes; the --check form is part of lint above
+  run: "./scripts/run_insecure_dev_server.sh"
   clean: "cargo clean"
 
 ai_context:
