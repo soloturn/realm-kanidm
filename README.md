@@ -1,38 +1,26 @@
-# Yggdrasil Realm Template
+# Kanidm Realm
 
-Starter realm for learning Yggdrasil and Guardian Driven Development.
-Fork or copy this to create your own community realm.
+Yggdrasil realm for tracking [kanidm/kanidm](https://github.com/kanidm/kanidm)
+— "a simple, secure and fast identity management platform" — via
+[Guardian Driven Development](https://siliconsaga.github.io/yggdrasil/gdd/).
+
+Forked from [SiliconSaga/realm-template](https://github.com/SiliconSaga/realm-template).
 
 ## Quick Start
 
 ```bash
-# If you're exploring GDD for the first time:
 cd yggdrasil
-ws realm init                      # clones this template
-ws clone --all                     # clones the tutorial components
-
-# Then start Claude Code and say hello!
+ws realm https://github.com/soloturn/realm-kanidm.git
+ws realm use realm-kanidm
+ws clone kanidm
 ```
-
-## Creating Your Own Realm
-
-1. Fork this repo on GitHub
-2. Rename it to `realm-<your-community>` (e.g. `realm-siliconsaga`)
-3. Edit `ecosystem.yaml`:
-   - Set `defaults.gitOrg` to your GitHub org URL
-   - Update `identity` with your accounts
-   - Declare your components under `components`
-4. Add adapter files in `adapters/` for components with custom build systems
-5. Clone your realm:
-   ```bash
-   ws realm https://github.com/YourOrg/realm-<your-community>.git
-   ```
 
 ## Structure
 
 ```
-ecosystem.yaml          # Components, defaults, identity
+ecosystem.yaml           # Declares the kanidm component (upstream + soloturn fork)
 adapters/
-  example.yaml          # Shows the adapter format (rename per component)
-README.md               # This file
+  kanidm.yaml             # cargo build/test/lint/run commands, verified against
+                           # kanidm's own developer docs
+README.md                # This file
 ```

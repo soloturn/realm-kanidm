@@ -1,29 +1,32 @@
-# ecosystem.yaml — Template Realm
+# ecosystem.yaml — Kanidm Realm
 #
-# Example realm for learning Yggdrasil and GDD. Declares a few public
-# repos that anyone can clone and explore without auth setup.
+# Realm for tracking kanidm/kanidm — "a simple, secure and fast identity
+# management platform" (https://github.com/kanidm/kanidm, upstream default
+# branch: master). Not part of the SiliconSaga game-hosting stack; this
+# realm just clones/builds/tests the project, it isn't chart-deployed here.
 #
-# To create your own realm: fork this repo, edit the values below,
-# and run `ws realm <your-fork-url>`.
+# Forked from SiliconSaga/realm-template.
 
 defaults:
-  gitOrg: https://github.com/SiliconSaga
+  gitOrg: https://github.com/kanidm
 
 identity:
-  agent_account: your-agent-account
-  co_authored_by: "Claude Opus 4.6"
+  agent_account: agent-kanidm
+  # co_authored_by is intentionally unset — when omitted, ws-commit.sh falls
+  # back to "Claude ${CLAUDE_MODEL:-Opus 4.7}", so the trailer tracks
+  # whichever model is actually running instead of aging as a stale pin.
+  #
   # human_account is personal — set it in ecosystem.local.yaml, not here
 
-# Tutorial components — public repos, no auth required
-components:
-  terasology:
-    tier: 3
-    chartVersion: "0.0.0"
-    chartName: "ts-game"
-    namespace: terasology
+# ---------------------------------------------------------------------------
+# Components
+# ---------------------------------------------------------------------------
 
-  destinationsol:
-    tier: 3
-    chartVersion: "0.0.0"
-    chartName: "ds-game"
-    namespace: destinationsol
+components:
+  # kanidm — upstream tracks `master`. No chart/namespace: standalone Rust
+  # project (Cargo workspace), not a Helm-deployed component in this realm.
+  # forkRepo points at the existing soloturn fork.
+  kanidm:
+    tier: supporting
+    repo: https://github.com/kanidm/kanidm.git
+    forkRepo: https://github.com/soloturn/kanidm.git

@@ -1,0 +1,21 @@
+# kanidm adapter — build/test/lint/run commands, verified against the
+# project's own developer docs (https://kanidm.github.io/kanidm/master/developers/index.html)
+# rather than guessed from the Cargo-workspace convention alone.
+#
+# Prerequisites (system deps vary by OS - see the developer docs):
+#   macOS: Xcode + rustup (https://rustup.rs/)
+#   Debian/Ubuntu: libudev-dev libssl-dev libsystemd-dev pkg-config libpam0g-dev clang lld
+
+commands:
+  build: "cargo build"
+  test: "cargo test"          # must work without extra setup
+  lint: "cargo clippy"
+  fmt: "cargo fmt --check"
+  run: "cd server/daemon && ./run_insecure_dev_server.sh"
+  clean: "cargo clean"
+
+ai_context:
+  - path: "README.md"
+    description: "Project overview and links to developer/user docs"
+  - path: "book/src/developers/readme.md"
+    description: "Full developer guide: build/test/lint, running a local dev server, doc build"
